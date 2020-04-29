@@ -1,27 +1,32 @@
 import os
 from PIL import Image
 
+# you can set rgb color values here
 colors = [(0,0,0),(90,90,90),(180,180,180),(255,255,255)]
 
+# this is your dump file
 f = open('gbDump.out')
 
+# here we remove comments, errors and empty lines from the input
 dump = []
 for line in f:
 	if (line[0] not in  ['!','#','{']) and (len(line)>1):
 		dump.append(line[:-1])
 
+# some outputs		
 for line in dump:
 	print(line)
 
 print(len(dump))
 
-#img = Image.new('RGB', (8, 8), color = 'white')
+# we create our canvas here
 img = Image.new('RGB', (20*8,18*8), color = 'green')
 pixels = img.load()
 
 #20 tiles width
 #18 tiles hight
-#tile = bytes.fromhex(dump[50])
+# gb image format: https://www.huderlem.com/demos/gameboy2bpp.html
+# conversion happens here
 for c in range(int(len(dump)/360)):
 	for h in range(0,18):
 		for w in range(0,20):
@@ -41,9 +46,11 @@ for c in range(int(len(dump)/360)):
 					if hi == 1 and lo == 1:
 						col = colors[0]	
 					pixels[(w*8)+j,(h*8)+i] = col
-					#farbcodierung: http://www.huderlem.com/demos/gameboy2bpp.html
 
 	#img.show()
-	#img.save('images/dump_{:03d}.png'.format(c))
+	
+	# resizing
 	img_reszied = img.resize((640,576),resample=Image.NEAREST)
+	
+	#saving
 	img_reszied.save('images/4x/dump_{:03d}.png'.format(c))
