@@ -1,5 +1,7 @@
 import os
 from PIL import Image
+import time
+timestr = time.strftime("%Y-%m-%d %H%M%S")
 
 # you can set rgb color values here
 colors = [(0,0,0),(90,90,90),(180,180,180),(255,255,255)]
@@ -13,7 +15,7 @@ for line in f:
 	if (line[0] not in  ['!','#','{']) and (len(line)>1):
 		dump.append(line[:-1])
 
-# some outputs		
+# some outputs
 for line in dump:
 	print(line)
 
@@ -44,13 +46,13 @@ for c in range(int(len(dump)/360)):
 					if hi == 0 and lo == 1:
 						col = colors[1]
 					if hi == 1 and lo == 1:
-						col = colors[0]	
+						col = colors[0]
 					pixels[(w*8)+j,(h*8)+i] = col
 
 	#img.show()
-	
+
 	# resizing
-	img_reszied = img.resize((640,576),resample=Image.NEAREST)
-	
+	img_resized = img.resize((640,576),resample=Image.NEAREST)
+
 	#saving
-	img_reszied.save('images/4x/dump_{:03d}.png'.format(c))
+	img_resized.save('images/image '+ timestr +' {:03d}.png'.format(c))
