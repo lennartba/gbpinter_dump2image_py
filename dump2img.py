@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 import time
-timestr = time.strftime("%Y-%m-%d %H%M%S")
+timestr = time.strftime("%Y%m%d - %H%M%S")
 
 # you can set rgb color values here
 colors = [(0,0,0),(90,90,90),(180,180,180),(255,255,255)]
@@ -52,7 +52,7 @@ for c in range(int(len(dump)/360)):
 	#img.show()
 
 	# resizing
-	img_resized = img.resize((640,576),resample=Image.NEAREST)
+	img_resized = img.resize((480,432),resample=Image.NEAREST)
 
 	#saving
-	img_resized.save('images/image '+ timestr +' {:03d}.png'.format(c))
+	img_resized.save('images/Game Boy Photo '+ timestr +' {:03d}.png'.format(c))
