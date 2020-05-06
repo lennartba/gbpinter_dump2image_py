@@ -1,13 +1,43 @@
 import os
+import argparse
 from PIL import Image
 import time
 timestr = time.strftime("%Y%m%d - %H%M%S")
 
-# you can set rgb color values here
-colors = [(0,0,0),(90,90,90),(180,180,180),(255,255,255)]
+#get arguments and set default values
+parser = argparse.ArgumentParser()
+parser.add_argument("-s","--scale", type=int,help="scale factor for image resizing as int, default = 1")
+parser.add_argument("-c0","--color0",nargs=3,type=int,help="substitute color for black in rgb, default = 0 0 0")
+parser.add_argument("-c1","--color1",nargs=3,type=int,help="substitute color for gray in rgb, default = 90 90 90")
+parser.add_argument("-c2","--color2",nargs=3,type=int,help="substitute color for light gray in rgb, default = 180 180 180")
+parser.add_argument("-c3","--color3",nargs=3,type=int,help="substitute color for white in rgb, default = 255 255 255")
+parser.add_argument("-o","--out_filename",help="output filename, default = 'Game Boy Photo'")
+parser.add_argument("-i","--in_filename",help="input filename, default = 'gbDump.out'")
+#parser.add_argument("-h","--help",help="show this message")
+
+args = parser.parse_args()
+
+# color values
+colors = [(0,0,0),(90,90,90),(180,180,180),(255,255,255)] #default values
+if args.color0: colors[0]=tuple(args.color0)
+if args.color1: colors[1]=tuple(args.color1)
+if args.color2: colors[2]=tuple(args.color2)
+if args.color3: colors[3]=tuple(args.color3)
 
 # this is your dump file
+in_filename = 'gbDump.out'
+if args.in_filename: in_filename = args.in_filename
 f = open('gbDump.out')
+
+# set output filename
+out_filename = 'Game Boy Photo'
+if args.out_filename: out_filename = args.out_filename
+
+# set scale multiplyer
+if args.scale:
+	scale = args.scale
+else:
+	scale = 1
 
 # here we remove comments, errors and empty lines from the input
 dump = []
@@ -52,7 +82,7 @@ for c in range(int(len(dump)/360)):
 	#img.show()
 
 	# resizing
-	img_resized = img.resize((480,432),resample=Image.NEAREST)
+	img_resized = img.resize((160*scale,144*scale),resample=Image.NEAREST)
 
 	#saving
-	img_resized.save('images/Game Boy Photo '+ timestr +' {:03d}.png'.format(c))
+	img_resized.save('images/{} {} {:03d}.png'.format(out_filename,timestr,c))
