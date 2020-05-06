@@ -8,6 +8,7 @@ quick and dirty batch converting of raw gameboy camera image data to png
 - copy paste the serial dump from your camera into gbDump.out and run the script.
 - the script will export files in the format "Image date - time nr.png" so it will not overwrite photos from an earlier export.
 
+```
 Arguments:
 usage: dump2img.py [-h] [-s SCALE] [-c0 COLOR0 COLOR0 COLOR0]
                    [-c1 COLOR1 COLOR1 COLOR1] [-c2 COLOR2 COLOR2 COLOR2]
@@ -23,16 +24,14 @@ optional arguments:
   -c1 COLOR1 COLOR1 COLOR1, --color1 COLOR1 COLOR1 COLOR1
                         substitute color for gray in rgb, default = 90 90 90
   -c2 COLOR2 COLOR2 COLOR2, --color2 COLOR2 COLOR2 COLOR2
-                        substitute color for light gray in rgb, default = 180
-                        180 180
+                        substitute color for light gray in rgb, default = 180 180 180
   -c3 COLOR3 COLOR3 COLOR3, --color3 COLOR3 COLOR3 COLOR3
-                        substitute color for white in rgb, default = 255 255
-                        255
+                        substitute color for white in rgb, default = 255 255 55
   -o OUT_FILENAME, --out_filename OUT_FILENAME
                         output filename, default = 'Game Boy Photo'
   -i IN_FILENAME, --in_filename IN_FILENAME
                         input filename, default = 'gbDump.out'
-
+```
 
 One great way to capture the image data:
 https://github.com/mofosyne/arduino-gameboy-printer-emulator
