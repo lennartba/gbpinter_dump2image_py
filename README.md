@@ -32,7 +32,7 @@ optional arguments:
   -i IN_FILENAME, --in_filename IN_FILENAME
                         input filename, default = 'gbDump.out'
 ```
-Example: ``` python3 dump2img.py -i myDump.txt -o myGameBoyImages -s 4 -o test -c0 255 0 0 -c1 0 255 0 -c2 0 0 255 -c3 0 0 0 ```
+Example: ``` python3 dump2img.py -i myDump.txt -o myGameBoyImages -s 4 -c0 255 0 0 -c1 0 255 0 -c2 0 0 255 -c3 0 0 0 ```
 
 One great way to capture the image data:
 https://github.com/mofosyne/arduino-gameboy-printer-emulator
