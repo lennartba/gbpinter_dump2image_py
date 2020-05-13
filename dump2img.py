@@ -29,7 +29,7 @@ if args.color3: colors[3]=tuple(args.color3)
 # this is your dump file
 in_filename = 'gbDump.out'
 if args.in_filename: in_filename = args.in_filename
-f = open('gbDump.out')
+f = open(in_filename)
 
 # set output filename
 out_filename = 'Game Boy Photo'
@@ -54,15 +54,17 @@ if not args.mute:
 
 	print(len(dump))
 
-# we create our canvas here
-img = Image.new('RGB', (20*8,18*8), color = 'green')
-pixels = img.load()
+
+
 
 #20 tiles width
 #18 tiles hight
 # gb image format: https://www.huderlem.com/demos/gameboy2bpp.html
 # conversion happens here
 for c in range(int(len(dump)/360)):
+	# we create our canvas here
+	img = Image.new('RGB', (20*8,18*8), color = 'green')
+	pixels = img.load()
 	for h in range(0,18):
 		for w in range(0,20):
 			tile = bytes.fromhex(dump[(c*360)+(h*20)+w])
