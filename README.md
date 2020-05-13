@@ -10,10 +10,9 @@ quick and dirty batch converting of raw gameboy camera image data to png
 
 ```
 Arguments:
-usage: dump2img.py [-h] [-s SCALE] [-c0 COLOR0 COLOR0 COLOR0]
-                   [-c1 COLOR1 COLOR1 COLOR1] [-c2 COLOR2 COLOR2 COLOR2]
-                   [-c3 COLOR3 COLOR3 COLOR3] [-o OUT_FILENAME]
-                   [-i IN_FILENAME]
+usage: dump2img.py [-h] [-s SCALE] [-c0 COLOR0 COLOR0 COLOR0] [-c1 COLOR1 COLOR1 COLOR1]
+                   [-c2 COLOR2 COLOR2 COLOR2] [-c3 COLOR3 COLOR3 COLOR3] [-o OUT_FILENAME]
+                   [-i IN_FILENAME] [-m] [-f]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -26,11 +25,13 @@ optional arguments:
   -c2 COLOR2 COLOR2 COLOR2, --color2 COLOR2 COLOR2 COLOR2
                         substitute color for light gray in rgb, default = 180 180 180
   -c3 COLOR3 COLOR3 COLOR3, --color3 COLOR3 COLOR3 COLOR3
-                        substitute color for white in rgb, default = 255 255 55
+                        substitute color for white in rgb, default = 255 255 255
   -o OUT_FILENAME, --out_filename OUT_FILENAME
                         output filename, default = 'Game Boy Photo'
   -i IN_FILENAME, --in_filename IN_FILENAME
                         input filename, default = 'gbDump.out'
+  -m, --mute            mutes the scripts outputs, default = not muted
+  -f, --cropframe       crops the frame, default = not cropped
 ```
 Example: ``` python3 dump2img.py -i myDump.txt -o myGameBoyImages -s 4 -c0 255 0 0 -c1 0 255 0 -c2 0 0 255 -c3 0 0 0 ```
 
