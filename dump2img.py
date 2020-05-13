@@ -13,6 +13,8 @@ parser.add_argument("-c2","--color2",nargs=3,type=int,help="substitute color for
 parser.add_argument("-c3","--color3",nargs=3,type=int,help="substitute color for white in rgb, default = 255 255 255")
 parser.add_argument("-o","--out_filename",help="output filename, default = 'Game Boy Photo'")
 parser.add_argument("-i","--in_filename",help="input filename, default = 'gbDump.out'")
+parser.add_argument("-m","--mute",action = 'store_true', help="mutes the scripts outputs, default = not muted")
+parser.add_argument("-f","--cropframe",action = 'store_true', help="crops the frame, default = not cropped")
 #parser.add_argument("-h","--help",help="show this message")
 
 args = parser.parse_args()
@@ -46,10 +48,11 @@ for line in f:
 		dump.append(line[:-1])
 
 # some outputs
-for line in dump:
-	print(line)
+if not args.mute:
+	for line in dump:
+		print(line)
 
-print(len(dump))
+	print(len(dump))
 
 # we create our canvas here
 img = Image.new('RGB', (20*8,18*8), color = 'green')
@@ -81,8 +84,12 @@ for c in range(int(len(dump)/360)):
 
 	#img.show()
 
+	#cropping
+	if args.cropframe:
+		img = img.crop((16,16,(18*8),(16*8)))
+	
 	# resizing
-	img_resized = img.resize((160*scale,144*scale),resample=Image.NEAREST)
+	img = img.resize((img.width*scale,img.height*scale),resample=Image.NEAREST)
 
 	#saving
-	img_resized.save('images/{} {} {:03d}.png'.format(out_filename,timestr,c))
+	img.save('images/{} {} {:03d}.png'.format(out_filename,timestr,c))
