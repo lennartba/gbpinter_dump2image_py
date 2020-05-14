@@ -13,11 +13,11 @@ parser.add_argument("-i","--in_filename",help="input filename, default = 'gbDump
 parser.add_argument("-m","--mute",action = 'store_true', help="mutes the scripts outputs, default = not muted")
 parser.add_argument("-f","--cropframe",action = 'store_true', help="crops the frame, default = not cropped")
 parser.add_argument("-d","--darken",type=int, nargs='+', choices=range(0, 101), help="darkens the image by appling the b/w image as layer with the set opacity, generates on image per given value")
-parser.add_argument("-dr","--darkenrange", action = 'store_true', help="darkens the image by appling the b/w image as layer with opacity in 10% increments from 0-100%, resulting in 10 output images per RGB image")
+parser.add_argument("-dr","--darkenrange", action = 'store_true', help="darkens the image by appling the b/w image as layer with opacity in 10%% increments from 0-100%%, resulting in 10 output images per RGB image")
 parser.add_argument("-l","--lighten",type=int, nargs='+', choices=range(0, 101), help="lightens the image by appling the b/w image as layer with the set opacity, generates on image per given value")
-parser.add_argument("-lr","--lightenrange", action = 'store_true', help="lightens the image by appling the b/w image as layer with opacity in 10% increments from 0-100%, resulting in 10 output images per RGB image")
+parser.add_argument("-lr","--lightenrange", action = 'store_true', help="lightens the image by appling the b/w image as layer with opacity in 10%% increments from 0-100%%, resulting in 10 output images per RGB image")
 parser.add_argument("-mu","--multiply",type=int, nargs='+', choices=range(0, 101), help="multiply layer operation by appling the b/w image as layer with the set opacity, generates on image per given value")
-parser.add_argument("-mr","--multiplyrange",action = 'store_true', help="multiply layer operation by appling the b/w image as layer with opacity in 10% increments from 0-100%, resulting in 10 output images per RGB image")
+parser.add_argument("-mr","--multiplyrange",action = 'store_true', help="multiply layer operation by appling the b/w image as layer with opacity in 10%% increments from 0-100%%, resulting in 10 output images per RGB image")
 args = parser.parse_args()
 
 # "color" values per channel
