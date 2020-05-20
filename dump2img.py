@@ -31,7 +31,7 @@ def create_image(data, colors=(BLACK, DARK_GREY, LIGHT_GREY, WHITE), mute=False,
     # conversion happens here
     for c in range(len(dump) // TILE_SIZE):
         # we create our canvas here
-        img = Image.new('RGB', (TILE_WIDTH * 8, TILE_HEIGHT * 8), color='green')
+        img = Image.new(mode='RGB', size=(TILE_WIDTH * 8, TILE_HEIGHT * 8))
         pixels = img.load()
         for h in range(TILE_HEIGHT):
             for w in range(TILE_WIDTH):
