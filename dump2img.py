@@ -14,7 +14,7 @@ TILE_HEIGHT = 18
 TILE_SIZE = TILE_WIDTH * TILE_HEIGHT
 
 
-def create_image(data, colors=(BLACK, DARK_GREY, LIGHT_GREY, WHITE), mute=False, scale=1, cropframe=False, file_prefix='Game Boy Photo', output_dir='images'):
+def create_image(data, colors=((WHITE, DARK_GREY), (LIGHT_GREY, BLACK)), mute=False, scale=1, cropframe=False, file_prefix='Game Boy Photo', output_dir='images'):
     # here we remove comments, errors and empty lines from the input
     dump = []
     for line in data:
@@ -38,18 +38,9 @@ def create_image(data, colors=(BLACK, DARK_GREY, LIGHT_GREY, WHITE), mute=False,
                 tile = bytes.fromhex(dump[(c * TILE_SIZE) + (h * TILE_WIDTH) + w])
                 for i in range(8):
                     for j in range(8):
-                        col = (255, 0, 0)
                         hi = (tile[i * 2] >> (7 - j)) & 1
                         lo = (tile[i * 2 + 1] >> (7 - j)) & 1
-                        if hi == 0 and lo == 0:
-                            col = colors[3]
-                        if hi == 1 and lo == 0:
-                            col = colors[2]
-                        if hi == 0 and lo == 1:
-                            col = colors[1]
-                        if hi == 1 and lo == 1:
-                            col = colors[0]
-                        pixels[(w * 8) + j, (h * 8) + i] = col
+                        pixels[(w * 8) + j, (h * 8) + i] = colors[hi][lo]
         # cropping
         if cropframe:
             img = img.crop((16, 16, (18 * 8), (16 * 8)))
@@ -77,9 +68,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    colors = [[args.color3, args.color1],
+              [args.color2, args.color0]]
+
     with open(args.in_filename) as input:
         create_image(data=input,
-                     colors=[args.color0, args.color1, args.color2, args.color3],
+                     colors=colors,
                      mute=args.mute,
                      scale=args.scale,
                      cropframe=args.cropframe,
