@@ -9,6 +9,10 @@ DARK_GREY = (90, 90, 90)
 LIGHT_GREY = (180, 180, 180)
 WHITE = (255, 255, 255)
 
+TILE_WIDTH = 20
+TILE_HEIGHT = 18
+TILE_SIZE = TILE_WIDTH * TILE_HEIGHT
+
 
 def create_image(data, colors=(BLACK, DARK_GREY, LIGHT_GREY, WHITE), mute=False, scale=1, cropframe=False, file_prefix='Game Boy Photo', output_dir='images'):
     # here we remove comments, errors and empty lines from the input
@@ -23,17 +27,15 @@ def create_image(data, colors=(BLACK, DARK_GREY, LIGHT_GREY, WHITE), mute=False,
             print(line)
         print(len(dump))
 
-    # 20 tiles width
-    # 18 tiles hight
     # gb image format: https://www.huderlem.com/demos/gameboy2bpp.html
     # conversion happens here
-    for c in range(len(dump) // 360):
+    for c in range(len(dump) // TILE_SIZE):
         # we create our canvas here
-        img = Image.new('RGB', (20 * 8, 18 * 8), color='green')
+        img = Image.new('RGB', (TILE_WIDTH * 8, TILE_HEIGHT * 8), color='green')
         pixels = img.load()
-        for h in range(18):
-            for w in range(20):
-                tile = bytes.fromhex(dump[(c * 360) + (h * 20) + w])
+        for h in range(TILE_HEIGHT):
+            for w in range(TILE_WIDTH):
+                tile = bytes.fromhex(dump[(c * TILE_SIZE) + (h * TILE_WIDTH) + w])
                 for i in range(8):
                     for j in range(8):
                         col = (255, 0, 0)
